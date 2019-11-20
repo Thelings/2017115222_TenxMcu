@@ -1,0 +1,27 @@
+C51 COMPILER V9.60.0.0   DISPLAY                                                           11/20/2019 11:08:59 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE DISPLAY
+OBJECT MODULE PLACED IN .\Objects\display.obj
+COMPILER INVOKED BY: G:\danpj\C51\BIN\C51.EXE display.c OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\dis
+                    -play.lst) TABS(2) OBJECT(.\Objects\display.obj)
+
+line level    source
+
+   1          #define __display_c
+   2          #include "includeAll.h"
+*** WARNING C316 IN LINE 2 OF display.c: unterminated conditionals
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
