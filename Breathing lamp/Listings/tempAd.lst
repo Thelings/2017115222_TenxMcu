@@ -1,0 +1,134 @@
+C51 COMPILER V9.60.0.0   TEMPAD                                                            11/20/2019 10:32:19 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE TEMPAD
+OBJECT MODULE PLACED IN .\Objects\tempAd.obj
+COMPILER INVOKED BY: G:\danpj\C51\BIN\C51.EXE tempAd.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\temp
+                    -Ad.lst) TABS(2) OBJECT(.\Objects\tempAd.obj)
+
+line level    source
+
+   1          
+   2          #define __tempAd_c
+   3          
+   4          #include    "includeAll.h"
+*** WARNING C318 IN LINE 1 OF includeAll.h: can't open file 'typeAlias.h'
+*** WARNING C315 IN LINE 4 OF keys.h: unknown #directive 'keyH1'
+*** ERROR C129 IN LINE 35 OF keys.h: missing ';' before 'keyValue'
+*** WARNING C315 IN LINE 5 OF triac.h: unknown #directive 'triacH1'
+*** WARNING C315 IN LINE 4 OF display.h: unknown #directive 'displayH1'
+*** WARNING C315 IN LINE 43 OF display.h: unknown #directive 'displayH2'
+*** WARNING C315 IN LINE 44 OF display.h: unknown #directive 'input1'
+*** WARNING C315 IN LINE 4 OF buzz.h: unknown #directive 'buzzH1'
+*** WARNING C315 IN LINE 5 OF tempAd.h: unknown #directive 'tempAdH1'
+   5          
+   6          //#define D_pullUp10K    1
+   7          //#define D_pullDown10K   1
+   8          
+   9          //10k Pull-down VCC, 12bits Ad sample
+  10          //0c--99c
+  11          #define D_tableSize 101
+  12          //pullup 10k
+  13          /*
+  14             code const uint16_t adTable[D_tableSize]={
+  15             3974,3968,3962,3955,3949,3942,3935,3927,3919,3911,3901,3892,3882,
+  16             3873,3863,3853,3842,3831,3820,3808,3795,3782,3768,3753,3738,3723,
+  17             3707,3692,3677,3663,3650,3633,3616,3599,3580,3560,3539,3517,3495,
+  18             3471,3448,3424,3400,3376,3353,3332,3306,3281,3255,3229,3202,3176,
+  19             3149,3122,3094,3066,3037,3007,2977,2945,2912,2881,2849,2817,2784,
+  20             2751,2718,2684,2650,2616,2582,2548,2514,2480,2447,2413,2381,2349,
+  21             2317,2285,2253,2221,2189,2157,2124,2091,2058,2024,1990,1955,1919,
+  22             1885,1853,1821,1790,1759,1728,1698,1668,1638,
+  23             };
+  24           */
+  25          //pulldown 10k
+  26          code const uint16_t adTable[D_tableSize] = {
+  27           127,
+  28           133, 139, 146, 153, 160, 168, 176, 184, 193, 201,
+  29           210, 220, 229, 239, 250, 261, 272, 283, 295, 307,
+  30           319, 332, 346, 359, 373, 388, 403, 418, 433, 449,
+  31           466, 483, 500, 518, 536, 554, 573, 592, 612, 632,
+  32           653, 674, 695, 717, 739, 761, 784, 807, 831, 855,
+  33           879, 904, 929, 954, 980,1006,1032,1059,1085,1112,
+  34          1140,1167,1195,1223,1251,1280,1308,1337,1366,1395,
+  35          1424,1453,1483,1512,1542,1571,1601,1631,1660,1690,
+  36          1720,1749,1779,1808,1838,1867,1896,1926,1955,1984,
+  37          2013,2041,2070,2098,2126,2154,2182,2210,2237,2264,
+  38          
+  39          
+  40          
+  41          };
+  42          
+  43          // return 0: short or off
+  44          // return 1--100c
+  45          void GetTemp(void)
+C51 COMPILER V9.60.0.0   TEMPAD                                                            11/20/2019 10:32:19 PAGE 2   
+
+  46          {
+  47          //  static uint16_t adFilterResult = 3650;
+  48            static uint16_t adFilterResult = 672;
+  49            uint16_t adCurResult;
+  50            uint8_t head, middle, end;
+  51            //ad0
+  52            #tempAdC1
+*** WARNING C315 IN LINE 52 OF tempAd.c: unknown #directive 'tempAdC1'
+  53            CHSEL = D_adChannel;  //AD0
+  54            OPTION = 0x04; //ADC Clock Rate 10: SYSCLK/16
+  55            CLRWDT = 1;
+  56            ADSOC = 1;
+  57            _nop_();
+  58            _nop_();
+  59            while (ADSOC) {
+  60            }
+  61            adCurResult = ADCDH;
+  62            adCurResult <<= 4;
+  63            head = ADTKDT;
+  64            head >>= 4;
+  65            adCurResult += head;
+  66            if (adCurResult >= D_shortValue) {
+  67              bAdShort = 1;
+  68              bAdOff = 0;
+  69              bKettleValid = 0;
+  70              padInvalidTimer1 = D_padInvalidTime1;
+  71              padInvalidTimer2 = D_padInvalidTime2;
+  72              return;
+  73            }else {
+  74              bAdShort = 0;
+  75              if (adCurResult <= D_offValue) {
+  76                bAdOff = 1;
+  77                bKettleValid = 0;
+  78                padInvalidTimer1 = D_padInvalidTime1;
+  79                padInvalidTimer2 = D_padInvalidTime2;
+  80                return;
+  81              }else {
+  82                bAdOff = 0;
+  83                bKettleValid = 1;
+  84                //filter
+  85                adFilterResult = (adFilterResult * 3 + adCurResult) / 4;
+  86                head = 0;
+  87                end = D_tableSize - 1;
+  88                middle = (head + end) / 2;
+  89                while (head != end) {
+  90                  if (adFilterResult > adTable[middle]) {
+  91                    head = middle + 1;
+  92                    middle = (head + end) / 2;
+  93                  }else {
+  94                    if (adFilterResult < adTable[middle]) {
+  95                      end = middle;
+  96                      middle = (head + end) / 2;
+  97                    }else {
+  98                      break;
+  99                    } //end if
+ 100                  }// end if
+ 101                }//end while
+ 102                curTemp = middle;
+ 103                if (curTemp >= 100) {
+ 104                  curTemp = 100;
+ 105                }
+ 106              }
+C51 COMPILER V9.60.0.0   TEMPAD                                                            11/20/2019 10:32:19 PAGE 3   
+
+ 107            }
+ 108          }
+
+C51 COMPILATION COMPLETE.  9 WARNING(S),  1 ERROR(S)
