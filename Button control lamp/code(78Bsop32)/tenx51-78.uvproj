@@ -36,8 +36,8 @@
           <BinPath></BinPath>
           <IncludePath></IncludePath>
           <LibPath></LibPath>
-          <RegisterFilePath>\tenx\</RegisterFilePath>
-          <DBRegisterFilePath>\tenx\</DBRegisterFilePath>
+          <RegisterFilePath>tenx\</RegisterFilePath>
+          <DBRegisterFilePath>tenx\</DBRegisterFilePath>
           <TargetStatus>
             <Error>0</Error>
             <ExitCodeStop>0</ExitCodeStop>
@@ -45,14 +45,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>huxi</OutputName>
+          <OutputDirectory>.\</OutputDirectory>
+          <OutputName>tenx51-78</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\Listings\</ListingPath>
+          <ListingPath>.\</ListingPath>
           <HexFormatSelection>0</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -168,15 +168,15 @@
         </DebugOption>
         <Utilities>
           <Flash1>
-            <UseTargetDll>0</UseTargetDll>
+            <UseTargetDll>1</UseTargetDll>
             <UseExternalTool>0</UseExternalTool>
-            <RunIndependent>0</RunIndependent>
+            <RunIndependent>1</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>-1</DriverSelection>
+            <DriverSelection>4101</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
-          <Flash2></Flash2>
+          <Flash2>C:\Keil\SampTarg.DLL</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
@@ -314,7 +314,7 @@
             <uAregs>0</uAregs>
             <UseInterruptVector>1</UseInterruptVector>
             <Fuzzy>3</Fuzzy>
-            <Optimize>1</Optimize>
+            <Optimize>8</Optimize>
             <WarningLevel>2</WarningLevel>
             <SizeSpeed>1</SizeSpeed>
             <ObjectExtend>1</ObjectExtend>
@@ -375,74 +375,26 @@
       <Groups>
         <Group>
           <GroupName>Source Group 1</GroupName>
-          <GroupOption>
-            <CommonProperty>
-              <UseCPPCompiler>0</UseCPPCompiler>
-              <RVCTCodeConst>0</RVCTCodeConst>
-              <RVCTZI>0</RVCTZI>
-              <RVCTOtherData>0</RVCTOtherData>
-              <ModuleSelection>0</ModuleSelection>
-              <IncludeInBuild>2</IncludeInBuild>
-              <AlwaysBuild>2</AlwaysBuild>
-              <GenerateAssemblyFile>2</GenerateAssemblyFile>
-              <AssembleAssemblyFile>2</AssembleAssemblyFile>
-              <PublicsOnly>2</PublicsOnly>
-              <StopOnExitCode>11</StopOnExitCode>
-              <CustomArgument></CustomArgument>
-              <IncludeLibraryModules></IncludeLibraryModules>
-              <ComprImg>1</ComprImg>
-              <BankNo>65535</BankNo>
-            </CommonProperty>
-            <Group51>
-              <C51>
-                <RegisterColoring>2</RegisterColoring>
-                <VariablesInOrder>2</VariablesInOrder>
-                <IntegerPromotion>2</IntegerPromotion>
-                <uAregs>2</uAregs>
-                <UseInterruptVector>2</UseInterruptVector>
-                <Fuzzy>8</Fuzzy>
-                <Optimize>0</Optimize>
-                <WarningLevel>3</WarningLevel>
-                <SizeSpeed>2</SizeSpeed>
-                <ObjectExtend>2</ObjectExtend>
-                <ACallAJmp>2</ACallAJmp>
-                <InterruptVectorAddress>0</InterruptVectorAddress>
-                <VariousControls>
-                  <MiscControls></MiscControls>
-                  <Define></Define>
-                  <Undefine></Undefine>
-                  <IncludePath></IncludePath>
-                </VariousControls>
-              </C51>
-              <Ax51>
-                <UseMpl>2</UseMpl>
-                <UseStandard>2</UseStandard>
-                <UseCase>2</UseCase>
-                <UseMod51>2</UseMod51>
-                <VariousControls>
-                  <MiscControls></MiscControls>
-                  <Define></Define>
-                  <Undefine></Undefine>
-                  <IncludePath></IncludePath>
-                </VariousControls>
-              </Ax51>
-            </Group51>
-          </GroupOption>
           <Files>
             <File>
-              <FileName>main.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\main.h</FilePath>
-            </File>
-            <File>
-              <FileName>mian.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\mian.c</FilePath>
+              <FileName>STARTUP_TENX52.A51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\STARTUP_TENX52.A51</FilePath>
             </File>
             <File>
               <FileName>display.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\display.c</FilePath>
+            </File>
+            <File>
+              <FileName>init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\init.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\main.c</FilePath>
             </File>
             <File>
               <FileName>display.h</FileName>
@@ -455,24 +407,9 @@
               <FilePath>.\includeAll.h</FilePath>
             </File>
             <File>
-              <FileName>init.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\init.c</FilePath>
-            </File>
-            <File>
               <FileName>init.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\init.h</FilePath>
-            </File>
-            <File>
-              <FileName>isr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\isr.c</FilePath>
-            </File>
-            <File>
-              <FileName>isr.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\isr.h</FilePath>
             </File>
             <File>
               <FileName>keys.c</FileName>
@@ -485,14 +422,14 @@
               <FilePath>.\keys.h</FilePath>
             </File>
             <File>
+              <FileName>main.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\main.h</FilePath>
+            </File>
+            <File>
               <FileName>REGtenxTM52F5278B.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\REGtenxTM52F5278B.h</FilePath>
-            </File>
-            <File>
-              <FileName>STARTUP_TENX52.A51</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\STARTUP_TENX52.A51</FilePath>
             </File>
             <File>
               <FileName>typeAlias.h</FileName>
