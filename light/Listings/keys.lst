@@ -1,0 +1,39 @@
+C51 COMPILER V9.60.0.0   KEYS                                                              11/25/2019 21:29:23 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE KEYS
+OBJECT MODULE PLACED IN .\Objects\keys.obj
+COMPILER INVOKED BY: G:\danpj\C51\BIN\C51.EXE code(78b)\keys.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listi
+                    -ngs\keys.lst) TABS(2) OBJECT(.\Objects\keys.obj)
+
+line level    source
+
+   1          #define __keys_c
+   2          #include "includeAll.h"
+              //=============================================================================
+              void GetKeys() {
+                static uint8_t tempKeyValue = D_keyNull;
+              
+                DelayMs(5);
+                if (P_key1 == 0) {
+                  tempKeyValue = D_keyValue1;
+                } else {
+                  keyValue = tempKeyValue;
+                  tempKeyValue = D_keyNull;
+                }
+              }
+*** WARNING C316 IN LINE 14 OF code(78b)\keys.c: unterminated conditionals
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

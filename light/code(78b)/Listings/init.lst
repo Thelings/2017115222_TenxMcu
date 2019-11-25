@@ -1,0 +1,53 @@
+C51 COMPILER V9.60.0.0   INIT                                                              11/25/2019 21:16:54 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE INIT
+OBJECT MODULE PLACED IN .\Objects\init.obj
+COMPILER INVOKED BY: G:\danpj\C51\BIN\C51.EXE init.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\init.l
+                    -st) TABS(2) OBJECT(.\Objects\init.obj)
+
+line level    source
+
+   1          #define __init_c
+   2          #include "includeAll.h"
+*** ERROR C129 IN LINE 19 OF main.h: missing ';' before 'void'
+   3          //=============================================================================
+   4          void SysInit() {
+   5            F_clearWDT();
+   6            //时钟初始化
+   7            CLKCON = 0x03; // Clock div 1
+   8            STPPCK = 0;
+   9            STPFCK = 0;
+  10            _nop_();
+  11            _nop_();
+  12            _nop_();
+  13            _nop_();
+  14            _nop_();
+  15            SELFCK = 1;
+  16            _nop_();
+  17            _nop_();
+  18            _nop_();
+  19            _nop_();
+  20            _nop_();
+  21            _nop_();
+  22            _nop_();
+  23            _nop_();
+  24            _nop_();
+  25            _nop_();
+  26            // IO 模式初始化
+  27            P1MODL = 0xa8;
+  28            P1_0 = 1;
+  29            // IO 状态初始化
+  30            F_ledOff();
+  31            //T2初始化
+  32            
+  33            TH2 = (65536 - 3686) / 256;
+  34            RCP2H = TH2;
+  35          
+  36            TL2 = (65536 - 3686) % 256;
+  37          }
+  38          //=============================================================================
+  39          void VarsInit() {}
+*** WARNING C316 IN LINE 39 OF init.c: unterminated conditionals
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  1 ERROR(S)

@@ -1,0 +1,174 @@
+C51 COMPILER V9.60.0.0   ISR                                                               11/25/2019 21:16:54 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE ISR
+OBJECT MODULE PLACED IN .\Objects\isr.obj
+COMPILER INVOKED BY: G:\danpj\C51\BIN\C51.EXE isr.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\isr.lst
+                    -) TABS(2) OBJECT(.\Objects\isr.obj)
+
+line level    source
+
+   1          //=============================================================================
+   2          //Name    :isr.c
+   3          //Purpose :Interrupt Service Routine
+   4          //=============================================================================
+   5          #define     __sir_c
+   6          
+   7          #include    "includeAll.h"
+*** ERROR C129 IN LINE 19 OF main.h: missing ';' before 'void'
+   8          //=============================================================================
+   9          // Function:  void INT0_int(void)
+  10          // Purpose: INT0 pin interrupt vector
+  11          // Input: none
+  12          // OutPut:  none
+  13          // Author:
+  14          //=============================================================================
+  15          void INT0_int(void) interrupt 0
+  16          {
+  17            IE0 = 0;            //clear interrupt flag
+  18          }
+  19          //=============================================================================
+  20          // Function:  void TIMER0_int(void)
+  21          // Purpose: TIMER0 interrupt vector
+  22          // Input: none
+  23          // OutPut:  none
+  24          // Author:
+  25          //=============================================================================
+  26          void TIMER0_int(void) interrupt 1
+  27          {
+  28            TF0 = 0;            //clear interrupt flag
+  29            TR0 = 0;
+  30            TH0 += 246;     //238= 8cycle  246=13cycle  stepMotor
+  31            TL0 += 2;
+  32            TR0 = 1;
+  33            #ifndef POWERSAVE
+  34            gBTimer0RollOver++;
+  35            AntiNoiseTimer++;
+  36            if (AntiNoiseTimer > 50) AntiNoiseTimer = 50;
+  37            #endif
+  38            //------------
+  39          }
+  40          //=============================================================================
+  41          // Function:  void INT1_int(void)
+  42          // Purpose: INT1 pin interrupt vector
+  43          // Input: none
+  44          // OutPut:  none
+  45          // Author:
+  46          //=============================================================================
+  47          void INT1_int(void) interrupt 2
+  48          {
+  49            IE1 = 0;            //clear interrupt flag
+  50          }
+  51          //=============================================================================
+  52          // Function:  void TIMER1_int(void)
+  53          // Purpose: TIMER1 interrupt vector
+C51 COMPILER V9.60.0.0   ISR                                                               11/25/2019 21:16:54 PAGE 2   
+
+  54          // Input: none
+  55          // OutPut:  none
+  56          // Author:
+  57          //=============================================================================
+  58          void TIMER1_int(void) interrupt 3
+  59          {
+  60            TF1 = 0;            //clear interrupt flag
+  61            TR1 = 0;
+  62            TH1 = (65536 - 28860) / 256;        //20ms timer1 interrupt
+  63            TL1 = (65536 - 28860) % 256;
+  64            #ifndef POWERSAVE
+  65            if (RawDataInvalidFlag) {
+  66              AntiNoiseDebounceTimer++;
+  67              if (AntiNoiseDebounceTimer > 10) {
+  68                AntiNoiseTimer = 0;
+  69                RawDataInvalidFlag = 0;
+  70              }
+  71            }
+  72            #endif
+  73            TR1 = 1;
+  74          }
+  75          //=============================================================================
+  76          // Function:  void UART_int(void)
+  77          // Purpose: UART interrupt vector
+  78          // Input: none
+  79          // OutPut:  none
+  80          // Author:
+  81          //=============================================================================
+  82          void UART_int(void) interrupt 4
+  83          {
+  84            TI = 0;             //clear interrupt flag
+  85            RI = 0;             //clear interrupt flag
+  86          }
+  87          //=============================================================================
+  88          // Function:  void TIMER2_int(void)
+  89          // Purpose: TIMER2 interrupt vector
+  90          // Input: none
+  91          // OutPut:  none
+  92          // Author:
+  93          //=============================================================================
+  94          void TIMER2_int(void) interrupt 5
+  95          {//88khz
+  96            TF2 = 0;            //clear interrupt flag
+  97            
+  98          }
+  99          //=============================================================================
+ 100          // Function:  void TIMER3_int(void)
+ 101          // Purpose: TIMER3 interrupt vector
+ 102          // Input: none
+ 103          // OutPut:  none
+ 104          // Author:
+ 105          //=============================================================================
+ 106          void TIMER3_int(void) interrupt 7
+ 107          {
+ 108            INTFLAG &= ~TF3;
+ 109            #ifdef POWERSAVE
+                gBTimer0RollOver++;
+                AntiNoiseTimer++;
+                if (AntiNoiseTimer > 50) AntiNoiseTimer = 50;
+                if (RawDataInvalidFlag) {
+                  AntiNoiseDebounceTimer++;
+                  if (AntiNoiseDebounceTimer > 10) {
+C51 COMPILER V9.60.0.0   ISR                                                               11/25/2019 21:16:54 PAGE 3   
+
+                    AntiNoiseTimer = 0;
+                    RawDataInvalidFlag = 0;
+                  }
+                }
+                #endif
+ 121          }
+ 122          //=============================================================================
+ 123          // Function:  void P1_int(void)
+ 124          // Purpose: P1 pin interrupt vector
+ 125          // Input: none
+ 126          // OutPut:  none
+ 127          // Author:
+ 128          //=============================================================================
+ 129          void P1_int(void) interrupt 8
+ 130          {
+ 131            INTFLAG &= ~P1IF;
+ 132          }
+ 133          //=============================================================================
+ 134          // Function:  void INT2_int(void)
+ 135          // Purpose: INT2 pin interrupt vector
+ 136          // Input: none
+ 137          // OutPut:  none
+ 138          // Author:
+ 139          //=============================================================================
+ 140          void INT2_int(void) interrupt 9
+ 141          {
+ 142            INTFLAG &= ~IE2;
+ 143          }
+ 144          //=============================================================================
+ 145          // Function:  void ADC_TK_int(void)
+ 146          // Purpose: ADC&TOUCHKEY interrupt vector
+ 147          // Input: none
+ 148          // OutPut:  none
+ 149          // Author:
+ 150          //=============================================================================
+ 151          void ADC_TK_int(void) interrupt 10
+ 152          {
+ 153            INTFLAG &= ~ADIF;
+ 154            INTFLAG &= ~TKIF;
+ 155            TKCON2 &= ~TKAUTO;  //disable touch key auto scan
+ 156          }
+*** WARNING C316 IN LINE 156 OF isr.c: unterminated conditionals
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  1 ERROR(S)
