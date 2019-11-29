@@ -1,0 +1,8 @@
+".\Objects\display.obj",
+".\Objects\init.obj",
+".\Objects\keys.obj",
+".\Objects\main.obj",
+".\Objects\STARTUP_TENX52.obj" 
+TO ".\Objects\Button control lamp" 
+
+PRINT(".\Listings\Button control lamp.map")
