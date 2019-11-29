@@ -1,8 +1,0 @@
-".\Objects\mian.obj",
-".\Objects\display.obj",
-".\Objects\init.obj",
-".\Objects\isr.obj",
-".\Objects\keys.obj",
-".\Objects\STARTUP_TENX52.obj" 
-TO ".\Objects\huxi" 
-PRINT(".\Listings\huxi.m51") RAMSIZE(256) 
