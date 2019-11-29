@@ -475,16 +475,6 @@
               <FilePath>.\isr.h</FilePath>
             </File>
             <File>
-              <FileName>keys.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\keys.c</FilePath>
-            </File>
-            <File>
-              <FileName>keys.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\keys.h</FilePath>
-            </File>
-            <File>
               <FileName>REGtenxTM52F5278B.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\REGtenxTM52F5278B.h</FilePath>

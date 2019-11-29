@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   ISR                                                               11/20/2019 11:09:00 PAGE 1   
+C51 COMPILER V9.60.0.0   ISR                                                               11/29/2019 11:02:21 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE ISR
@@ -62,7 +62,7 @@ line level    source
               // Function:  void TIMER1_int(void)
               // Purpose: TIMER1 interrupt vector
               // Input: none
-C51 COMPILER V9.60.0.0   ISR                                                               11/20/2019 11:09:00 PAGE 2   
+C51 COMPILER V9.60.0.0   ISR                                                               11/29/2019 11:02:21 PAGE 2   
 
               // OutPut:  none
               // Author:
@@ -126,7 +126,7 @@ line level    source
                   AntiNoiseDebounceTimer++;
                   if (AntiNoiseDebounceTimer > 10) {
                     AntiNoiseTimer = 0;
-C51 COMPILER V9.60.0.0   ISR                                                               11/20/2019 11:09:00 PAGE 3   
+C51 COMPILER V9.60.0.0   ISR                                                               11/29/2019 11:02:21 PAGE 3   
 
                     RawDataInvalidFlag = 0;
                   }

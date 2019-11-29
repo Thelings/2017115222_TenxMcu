@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   MIAN                                                              11/20/2019 11:08:59 PAGE 1   
+C51 COMPILER V9.60.0.0   MIAN                                                              11/29/2019 11:02:21 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MIAN
@@ -62,7 +62,7 @@ line level    source
                   b4ms = 0;
                   timer4ms++;
                   timer250ms++;
-C51 COMPILER V9.60.0.0   MIAN                                                              11/20/2019 11:08:59 PAGE 2   
+C51 COMPILER V9.60.0.0   MIAN                                                              11/29/2019 11:02:21 PAGE 2   
 
                   timer1s++;
                 }
@@ -126,7 +126,7 @@ line level    source
               // OutPut:  none
               // Author:
               //=============================================================================
-C51 COMPILER V9.60.0.0   MIAN                                                              11/20/2019 11:08:59 PAGE 3   
+C51 COMPILER V9.60.0.0   MIAN                                                              11/29/2019 11:02:21 PAGE 3   
 
               void TIMER2_int(void) interrupt 5 { // 4Khz == 0.25ms
                 TF2 = 0;                          // clear interrupt flag
