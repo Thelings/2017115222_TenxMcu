@@ -1,7 +1,10 @@
 ".\Objects\STARTUP_TENX52.obj",
 ".\Objects\display.obj",
 ".\Objects\init.obj",
+".\Objects\isr.obj",
 ".\Objects\keys.obj",
 ".\Objects\main.obj" 
-TO ".\Objects\Single port control" 
+TO ".\Objects\Single port control" REGFILE (.\Objects\Single port control.ORC) 
 PRINT(".\Listings\Single port control.m51") RAMSIZE(256) 
+CODE( 0x00-0x32,0x3b-0x0cff,0x1000-0x1ffd )
+XDATA( 0xff00-0xffff )

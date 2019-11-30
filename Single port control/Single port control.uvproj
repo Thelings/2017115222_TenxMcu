@@ -49,9 +49,9 @@
           <OutputName>Single port control</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
-          <DebugInformation>1</DebugInformation>
-          <BrowseInformation>1</BrowseInformation>
+          <CreateHexFile>1</CreateHexFile>
+          <DebugInformation>0</DebugInformation>
+          <BrowseInformation>0</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
           <HexFormatSelection>0</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -125,7 +125,7 @@
             <Oh166RecLen>16</Oh166RecLen>
           </OPTHX>
           <Simulator>
-            <UseSimulator>1</UseSimulator>
+            <UseSimulator>0</UseSimulator>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
             <RunToMain>1</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
@@ -137,9 +137,9 @@
             <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
-            <UseTarget>0</UseTarget>
+            <UseTarget>1</UseTarget>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>0</RunToMain>
+            <RunToMain>1</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
             <RestoreWatchpoints>1</RestoreWatchpoints>
             <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
@@ -149,7 +149,7 @@
             <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>-1</TargetSelection>
+          <TargetSelection>12</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -163,21 +163,21 @@
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
             <InitializationFile></InitializationFile>
-            <Driver></Driver>
+            <Driver>G:\danpj\SampTarg.DLL</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
           <Flash1>
-            <UseTargetDll>0</UseTargetDll>
+            <UseTargetDll>1</UseTargetDll>
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
-            <UpdateFlashBeforeDebugging>0</UpdateFlashBeforeDebugging>
-            <Capability>0</Capability>
+            <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
+            <Capability>1</Capability>
             <DriverSelection>-1</DriverSelection>
           </Flash1>
-          <bUseTDR>0</bUseTDR>
+          <bUseTDR>1</bUseTDR>
           <Flash2></Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -233,7 +233,7 @@
               <RCB>
                 <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <Size>0xffff</Size>
               </RCB>
               <RXB>
                 <Type>0</Type>
@@ -308,17 +308,17 @@
             </OnChipMemories>
           </Target51Misc>
           <C51>
-            <RegisterColoring>0</RegisterColoring>
-            <VariablesInOrder>0</VariablesInOrder>
+            <RegisterColoring>1</RegisterColoring>
+            <VariablesInOrder>1</VariablesInOrder>
             <IntegerPromotion>1</IntegerPromotion>
-            <uAregs>0</uAregs>
+            <uAregs>1</uAregs>
             <UseInterruptVector>1</UseInterruptVector>
             <Fuzzy>3</Fuzzy>
             <Optimize>8</Optimize>
             <WarningLevel>2</WarningLevel>
             <SizeSpeed>1</SizeSpeed>
             <ObjectExtend>1</ObjectExtend>
-            <ACallAJmp>0</ACallAJmp>
+            <ACallAJmp>1</ACallAJmp>
             <InterruptVectorAddress>0</InterruptVectorAddress>
             <VariousControls>
               <MiscControls></MiscControls>
@@ -330,7 +330,7 @@
           <Ax51>
             <UseMpl>0</UseMpl>
             <UseStandard>1</UseStandard>
-            <UseCase>0</UseCase>
+            <UseCase>1</UseCase>
             <UseMod51>0</UseMod51>
             <VariousControls>
               <MiscControls></MiscControls>
@@ -342,8 +342,8 @@
           <Lx51>
             <useFile>0</useFile>
             <linkonly>0</linkonly>
-            <UseMemoryFromTarget>1</UseMemoryFromTarget>
-            <CaseSensitiveSymbols>0</CaseSensitiveSymbols>
+            <UseMemoryFromTarget>0</UseMemoryFromTarget>
+            <CaseSensitiveSymbols>1</CaseSensitiveSymbols>
             <WarningLevel>2</WarningLevel>
             <DataOverlaying>1</DataOverlaying>
             <OverlayString></OverlayString>
@@ -364,8 +364,8 @@
             <IDataBaseAddress></IDataBaseAddress>
             <Precede></Precede>
             <Stack></Stack>
-            <CodeSegmentName></CodeSegmentName>
-            <XDataSegmentName></XDataSegmentName>
+            <CodeSegmentName>0x00-0x32,0x3b-0x0cff,0x1000-0x1ffd</CodeSegmentName>
+            <XDataSegmentName>0xff00-0xffff</XDataSegmentName>
             <BitSegmentName></BitSegmentName>
             <DataSegmentName></DataSegmentName>
             <IDataSegmentName></IDataSegmentName>
@@ -405,6 +405,16 @@
               <FileName>init.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\init.h</FilePath>
+            </File>
+            <File>
+              <FileName>isr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\isr.c</FilePath>
+            </File>
+            <File>
+              <FileName>isr.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\isr.h</FilePath>
             </File>
             <File>
               <FileName>keys.c</FileName>

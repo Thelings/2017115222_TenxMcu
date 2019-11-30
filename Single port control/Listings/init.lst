@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.0.0   INIT                                                              11/30/2019 19:43:17 PAGE 1   
+C51 COMPILER V9.60.0.0   INIT                                                              11/30/2019 23:17:59 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE INIT
 OBJECT MODULE PLACED IN .\Objects\init.obj
-COMPILER INVOKED BY: G:\danpj\C51\BIN\C51.EXE init.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\init.l
-                    -st) TABS(2) OBJECT(.\Objects\init.obj)
+COMPILER INVOKED BY: G:\danpj\C51\BIN\C51.EXE init.c OPTIMIZE(8,SPEED) REGFILE(.\Objects\Single port control.ORC) ORDER 
+                    -NOAREGS CODE PRINT(.\Listings\init.lst) TABS(2) OBJECT(.\Objects\init.obj)
 
 line level    source
 
@@ -12,17 +12,17 @@ line level    source
    2          #include "includeAll.h"
    3          //=============================================================================
    4          void SysInit() {
-   5   1        //时钟初始化
-   6   1        CLKCON = 0x03; // Clock div 1
-   7   1        STPPCK = 0;
-   8   1        STPFCK = 0;
-   9   1        _nop_();
+   5   1        F_clearWDT();
+   6   1        //时钟初始化
+   7   1        CLKCON = 0x03; // Clock div 1  7.3728Mhz
+   8   1        STPPCK = 0;
+   9   1        STPFCK = 0;
   10   1        _nop_();
   11   1        _nop_();
   12   1        _nop_();
   13   1        _nop_();
-  14   1        SELFCK = 1;
-  15   1        _nop_();
+  14   1        _nop_();
+  15   1        SELFCK = 1;
   16   1        _nop_();
   17   1        _nop_();
   18   1        _nop_();
@@ -32,18 +32,103 @@ line level    source
   22   1        _nop_();
   23   1        _nop_();
   24   1        _nop_();
-  25   1        // IO 模式初始化
-  26   1        P1MODL = 0xa8;
-  27   1        P1_0 = 1;
+  25   1        _nop_();
+  26   1        // IO 模式初始化
+  27   1        P1MODL = 0xaa; 
   28   1        // IO 状态初始化
   29   1        F_ledOff();
-  30   1      }
-  31          //=============================================================================
-  32          void VarsInit() {}
+  30   1        // T2 初始化  7.3728Mhz/2 = 3686400Hz
+  31   1        //  3686400Hz/3686.4 = 1000Hz = 1ms timer2 interrupt
+  32   1        TH2 = (65536 - 3686) / 256;
+  33   1        RCP2H = TH2;
+  34   1        TL2 = (65536 - 3686) % 256;
+  35   1        RCP2L = TL2;
+  36   1        TR2 = 1;
+  37   1        ET2 = 1;
+  38   1        EA = 1;
+  39   1      }
+  40          //=============================================================================
+  41          void VarsInit() {}
+C51 COMPILER V9.60.0.0   INIT                                                              11/30/2019 23:17:59 PAGE 2   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION SysInit (BEGIN)
+                                           ; SOURCE LINE # 4
+                                           ; SOURCE LINE # 5
+0000 D2FF              SETB    CLRWDT
+                                           ; SOURCE LINE # 7
+0002 75D803            MOV     CLKCON,#03H
+                                           ; SOURCE LINE # 8
+0005 C2DC              CLR     STPPCK
+                                           ; SOURCE LINE # 9
+0007 C2DB              CLR     STPFCK
+                                           ; SOURCE LINE # 10
+0009 00                NOP     
+                                           ; SOURCE LINE # 11
+000A 00                NOP     
+                                           ; SOURCE LINE # 12
+000B 00                NOP     
+                                           ; SOURCE LINE # 13
+000C 00                NOP     
+                                           ; SOURCE LINE # 14
+000D 00                NOP     
+                                           ; SOURCE LINE # 15
+000E D2DA              SETB    SELFCK
+                                           ; SOURCE LINE # 16
+0010 00                NOP     
+                                           ; SOURCE LINE # 17
+0011 00                NOP     
+                                           ; SOURCE LINE # 18
+0012 00                NOP     
+                                           ; SOURCE LINE # 19
+0013 00                NOP     
+                                           ; SOURCE LINE # 20
+0014 00                NOP     
+                                           ; SOURCE LINE # 21
+0015 00                NOP     
+                                           ; SOURCE LINE # 22
+0016 00                NOP     
+                                           ; SOURCE LINE # 23
+0017 00                NOP     
+                                           ; SOURCE LINE # 24
+0018 00                NOP     
+                                           ; SOURCE LINE # 25
+0019 00                NOP     
+                                           ; SOURCE LINE # 27
+001A 75A2AA            MOV     P1MODL,#0AAH
+                                           ; SOURCE LINE # 29
+001D C290              CLR     P1_0
+                                           ; SOURCE LINE # 32
+001F 75CDF1            MOV     TH2,#0F1H
+                                           ; SOURCE LINE # 33
+0022 85CDCB            MOV     RCP2H,TH2
+                                           ; SOURCE LINE # 34
+0025 75CC9A            MOV     TL2,#09AH
+                                           ; SOURCE LINE # 35
+0028 85CCCA            MOV     RCP2L,TL2
+                                           ; SOURCE LINE # 36
+002B D2CA              SETB    TR2
+                                           ; SOURCE LINE # 37
+002D D2AD              SETB    ET2
+                                           ; SOURCE LINE # 38
+C51 COMPILER V9.60.0.0   INIT                                                              11/30/2019 23:17:59 PAGE 3   
+
+002F D2AF              SETB    EA
+                                           ; SOURCE LINE # 39
+0031 22                RET     
+             ; FUNCTION SysInit (END)
+
+             ; FUNCTION VarsInit (BEGIN)
+                                           ; SOURCE LINE # 41
+0000 22                RET     
+             ; FUNCTION VarsInit (END)
+
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     33    ----
+   CODE SIZE        =     51    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

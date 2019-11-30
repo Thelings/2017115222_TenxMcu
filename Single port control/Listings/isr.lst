@@ -1,0 +1,221 @@
+C51 COMPILER V9.60.0.0   ISR                                                               11/30/2019 23:17:59 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE ISR
+OBJECT MODULE PLACED IN .\Objects\isr.obj
+COMPILER INVOKED BY: G:\danpj\C51\BIN\C51.EXE isr.c OPTIMIZE(8,SPEED) REGFILE(.\Objects\Single port control.ORC) ORDER N
+                    -OAREGS CODE PRINT(.\Listings\isr.lst) TABS(2) OBJECT(.\Objects\isr.obj)
+
+line level    source
+
+   1          //=============================================================================
+   2          // Name   :isr.c
+   3          // Purpose  :Interrupt Service Routines
+   4          //=============================================================================
+   5          #define __isr_c
+   6          
+   7          #include "includeAll.h"
+   8          //=============================================================================
+   9          // Function:  void INT0_int(void)
+  10          // Purpose: INT0 pin interrupt vector
+  11          // Input: none
+  12          // OutPut:  none
+  13          // Author:
+  14          //=============================================================================
+  15          void INT0_int(void) interrupt 0 {
+  16   1        IE0 = 0; // clear interrupt flag
+  17   1      }
+  18          //=============================================================================
+  19          // Function:  void TIMER0_int(void)
+  20          // Purpose: TIMER0 interrupt vector
+  21          // Input: none
+  22          // OutPut:  none
+  23          // Author:
+  24          //=============================================================================
+  25          void TIMER0_int(void) interrupt 1 {
+  26   1        TF0 = 0; // clear interrupt flag
+  27   1        //------------
+  28   1      }
+  29          //=============================================================================
+  30          // Function:  void INT1_int(void)
+  31          // Purpose: INT1 pin interrupt vector
+  32          // Input: none
+  33          // OutPut:  none
+  34          // Author:
+  35          //=============================================================================
+  36          void INT1_int(void) interrupt 2 {
+  37   1        IE1 = 0; // clear interrupt flag
+  38   1      }
+  39          //=============================================================================
+  40          // Function:  void TIMER1_int(void)
+  41          // Purpose: TIMER1 interrupt vector
+  42          // Input: none
+  43          // OutPut:  none
+  44          // Author:
+  45          //=============================================================================
+  46          void TIMER1_int(void) interrupt 3 {
+  47   1        TF1 = 0; // clear interrupt flag
+  48   1      }
+  49          //=============================================================================
+  50          // Function:  void UART_int(void)
+  51          // Purpose: UART interrupt vector
+  52          // Input: none
+  53          // OutPut:  none
+  54          // Author:
+C51 COMPILER V9.60.0.0   ISR                                                               11/30/2019 23:17:59 PAGE 2   
+
+  55          //=============================================================================
+  56          void UART_int(void) interrupt 4 {
+  57   1        TI = 0; // clear interrupt flag
+  58   1        RI = 0; // clear interrupt flag
+  59   1      }
+  60          //=============================================================================
+  61          // Function:  void TIMER2_int(void)
+  62          // Purpose: TIMER2 interrupt vector
+  63          // Input: none
+  64          // OutPut:  none
+  65          // Author:
+  66          //=============================================================================
+  67          void TIMER2_int(void) interrupt 5 {
+  68   1        TF2 = 0; // clear interrupt flag
+  69   1        b1ms = 1;
+  70   1      }
+  71          //=============================================================================
+  72          // Function:  void TIMER3_int(void)
+  73          // Purpose: TIMER3 interrupt vector
+  74          // Input: none
+  75          // OutPut:  none
+  76          // Author:
+  77          //=============================================================================
+  78          void TIMER3_int(void) interrupt 7 { INTFLAG &= ~TF3; }
+  79          //=============================================================================
+  80          // Function:  void P1_int(void)
+  81          // Purpose: P1 pin interrupt vector
+  82          // Input: none
+  83          // OutPut:  none
+  84          // Author:
+  85          //=============================================================================
+  86          void P1_int(void) interrupt 8 { INTFLAG &= ~P1IF; }
+  87          //=============================================================================
+  88          // Function:  void INT2_int(void)
+  89          // Purpose: INT2 pin interrupt vector
+  90          // Input: none
+  91          // OutPut:  none
+  92          // Author:
+  93          //=============================================================================
+  94          void INT2_int(void) interrupt 9 { INTFLAG &= ~IE2; }
+  95          //=============================================================================
+  96          // Function:  void ADC_TK_int(void)
+  97          // Purpose: ADC&TOUCHKEY interrupt vector
+  98          // Input: none
+  99          // OutPut:  none
+ 100          // Author:
+ 101          //=============================================================================
+ 102          void ADC_TK_int(void) interrupt 10 {
+ 103   1        INTFLAG &= ~ADIF;
+ 104   1        INTFLAG &= ~TKIF;
+ 105   1        TKCON2 &= ~TKAUTO; // disable touch key auto scan
+ 106   1      }
+C51 COMPILER V9.60.0.0   ISR                                                               11/30/2019 23:17:59 PAGE 3   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION INT0_int (BEGIN)
+                                           ; SOURCE LINE # 15
+                                           ; SOURCE LINE # 16
+0000 C289              CLR     IE0
+                                           ; SOURCE LINE # 17
+0002 32                RETI    
+             ; FUNCTION INT0_int (END)
+
+             ; FUNCTION TIMER0_int (BEGIN)
+                                           ; SOURCE LINE # 25
+                                           ; SOURCE LINE # 26
+0000 C28D              CLR     TF0
+                                           ; SOURCE LINE # 28
+0002 32                RETI    
+             ; FUNCTION TIMER0_int (END)
+
+             ; FUNCTION INT1_int (BEGIN)
+                                           ; SOURCE LINE # 36
+                                           ; SOURCE LINE # 37
+0000 C28B              CLR     IE1
+                                           ; SOURCE LINE # 38
+0002 32                RETI    
+             ; FUNCTION INT1_int (END)
+
+             ; FUNCTION TIMER1_int (BEGIN)
+                                           ; SOURCE LINE # 46
+                                           ; SOURCE LINE # 47
+0000 C28F              CLR     TF1
+                                           ; SOURCE LINE # 48
+0002 32                RETI    
+             ; FUNCTION TIMER1_int (END)
+
+             ; FUNCTION UART_int (BEGIN)
+                                           ; SOURCE LINE # 56
+                                           ; SOURCE LINE # 57
+0000 C299              CLR     TI
+                                           ; SOURCE LINE # 58
+0002 C298              CLR     RI
+                                           ; SOURCE LINE # 59
+0004 32                RETI    
+             ; FUNCTION UART_int (END)
+
+             ; FUNCTION TIMER2_int (BEGIN)
+                                           ; SOURCE LINE # 67
+                                           ; SOURCE LINE # 68
+0000 C2CF              CLR     TF2
+                                           ; SOURCE LINE # 69
+0002 D200        R     SETB    b1ms
+                                           ; SOURCE LINE # 70
+0004 32                RETI    
+             ; FUNCTION TIMER2_int (END)
+
+             ; FUNCTION TIMER3_int (BEGIN)
+                                           ; SOURCE LINE # 78
+0000 5395FE            ANL     INTFLAG,#0FEH
+0003 32                RETI    
+             ; FUNCTION TIMER3_int (END)
+
+             ; FUNCTION P1_int (BEGIN)
+C51 COMPILER V9.60.0.0   ISR                                                               11/30/2019 23:17:59 PAGE 4   
+
+                                           ; SOURCE LINE # 86
+0000 5395FD            ANL     INTFLAG,#0FDH
+0003 32                RETI    
+             ; FUNCTION P1_int (END)
+
+             ; FUNCTION INT2_int (BEGIN)
+                                           ; SOURCE LINE # 94
+0000 5395FB            ANL     INTFLAG,#0FBH
+0003 32                RETI    
+             ; FUNCTION INT2_int (END)
+
+             ; FUNCTION ADC_TK_int (BEGIN)
+                                           ; SOURCE LINE # 102
+                                           ; SOURCE LINE # 103
+0000 5395EF            ANL     INTFLAG,#0EFH
+                                           ; SOURCE LINE # 104
+0003 5395DF            ANL     INTFLAG,#0DFH
+                                           ; SOURCE LINE # 105
+0006 53AFF7            ANL     TKCON2,#0F7H
+                                           ; SOURCE LINE # 106
+0009 32                RETI    
+             ; FUNCTION ADC_TK_int (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     44    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

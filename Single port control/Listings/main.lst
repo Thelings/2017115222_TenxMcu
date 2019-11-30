@@ -1,94 +1,205 @@
-C51 COMPILER V9.60.0.0   MAIN                                                              11/30/2019 19:43:17 PAGE 1   
+C51 COMPILER V9.60.0.0   MAIN                                                              11/30/2019 23:17:59 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN .\Objects\main.obj
-COMPILER INVOKED BY: G:\danpj\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.l
-                    -st) TABS(2) OBJECT(.\Objects\main.obj)
+COMPILER INVOKED BY: G:\danpj\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) REGFILE(.\Objects\Single port control.ORC) ORDER 
+                    -NOAREGS CODE PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
 
 line level    source
 
-   1          #define ___main_c
+   1          #define __main_c
    2          #include "includeAll.h"
    3          //=============================================================================
-   4          
-   5          int model = 1;           //状态初始化为1
-   6          
-   7          void main(){
-   8   1        SysInit();
-   9   1        VarsInit();
-  10   1        //使能看门狗
-  11   1        F_turnOnWDT();
-  12   1      
-  13   1        while (1) {
-  14   2          TimeProcess();
-  15   2          DisplayProcess();
-  16   2          TaskSetting();
-  17   2          TaskProcess();
-  18   2        }
-  19   1      
-  20   1      }
-  21          
-  22          
-  23          //============================================
-  24          void DisplayProcess() {}
-  25          //============================================
-  26          void TimeProcess() {}
-  27          //============================================
-  28          void TaskSetting(){ }
-  29          //=========单端口控制LED亮灭===================
-  30          void TaskProcess() {
-  31   1        
-  32   1        if (model== 1){          
-  33   2          
-  34   2          //设为上拉模式，获取按键值
-  35   2          P1MODL = 0xa8;    
-  36   2          GetKeyValue();
-*** WARNING C206 IN LINE 36 OF main.c: 'GetKeyValue': missing function-prototype
-  37   2          DelayMs(100);    //设置延时，获取按钮的值
-  38   2          //按下按键
-  39   2          if(D_keyValue1 == keyValue){
-  40   3            model_Switch();  //状态标志取反
-  41   3          }
-  42   2          P1MODL = 0xaa;     //模式为推挽输出，点亮LED
-  43   2          
-  44   2        }
-  45   1          else {       //未按下按键，为上拉模式
-  46   2      
-  47   2            //设置为上拉模式，获取按键值
-  48   2          P1MODL = 0xa8;  
-  49   2          GetKeyValue();
-  50   2          //按下按键
-  51   2          if(D_keyValue1 == keyValue){
-  52   3            model_Switch();   //状态标志取反
-  53   3          
-C51 COMPILER V9.60.0.0   MAIN                                                              11/30/2019 19:43:17 PAGE 2   
+   4          void main() {
+   5   1        SysInit();
+   6   1        VarsInit();
+   7   1        //使能看门狗
+   8   1        F_turnOnWDT();
+   9   1        while (1) {
+  10   2          //喂狗
+  11   2          F_clearWDT();
+  12   2          //业务代码
+  13   2          TimeProcess();
+  14   2          TaskSetting();
+  15   2          TaskProcess();
+  16   2          DisplayProcess();
+  17   2        }
+  18   1      }
+  19          //=============================================================================
+  20          void TimeProcess() {
+  21   1        static uint8_t timer5ms = 0;
+  22   1        static uint16_t second = 0;
+  23   1      
+  24   1        if (b1ms) {
+  25   2          // 1ms 执行一次
+  26   2          b1ms = 0;
+  27   2          timer5ms++;
+  28   2          second++;
+  29   2        }
+  30   1        if (timer5ms >= D_5ms) {
+  31   2          // 5ms 执行一次
+  32   2          timer5ms = 0;
+  33   2          GetKeys();
+  34   2        }
+  35   1        if (second >= D_1000ms) {
+  36   2          // 1s 执行一次
+  37   2          second = 0;
+  38   2        }
+  39   1      }
+  40          //=============================================================================
+  41          void TaskProcess() {}
+  42          //=============================================================================
+  43          void TaskSetting() {
+  44   1        if (D_keyValue1 == keyValue) {
+  45   2          bLedFlash = ~bLedFlash;
+  46   2        }
+  47   1        keyValue = D_keyNull;
+  48   1      }
+  49          //=============================================================================
+  50          void DisplayProcess() {
+  51   1        // F_ledOn();
+  52   1        if (bLedFlash) {
+  53   2          F_ledOn();
+  54   2        } else {
+C51 COMPILER V9.60.0.0   MAIN                                                              11/30/2019 23:17:59 PAGE 2   
 
-  54   3            }
-  55   2      
-  56   2        } 
-  57   1      
-  58   1      }
-  59          
-  60          
-  61          void DelayMs(int time){
-  62   1        uint16_t i,j;
-  63   1        for(i=0; i<time; i++){
-  64   2          for(j=0; j<1000; j++){
-  65   3          }
-  66   2        }
-  67   1      }
+  55   2          F_ledOff();
+  56   2        }
+  57   1      }
+C51 COMPILER V9.60.0.0   MAIN                                                              11/30/2019 23:17:59 PAGE 3   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 4
+                                           ; SOURCE LINE # 5
+0000 120000      E     LCALL   SysInit
+                                           ; SOURCE LINE # 6
+0003 120000      E     LCALL   VarsInit
+                                           ; SOURCE LINE # 8
+0006 E5F7              MOV     A,CFGWL
+0008 543F              ANL     A,#03FH
+000A 44C0              ORL     A,#0C0H
+000C F5F7              MOV     CFGWL,A
+000E         ?C0001:
+                                           ; SOURCE LINE # 9
+                                           ; SOURCE LINE # 11
+000E D2FF              SETB    CLRWDT
+                                           ; SOURCE LINE # 13
+0010 120000      R     LCALL   TimeProcess
+                                           ; SOURCE LINE # 14
+0013 120000      R     LCALL   TaskSetting
+                                           ; SOURCE LINE # 15
+0016 120000      R     LCALL   TaskProcess
+                                           ; SOURCE LINE # 16
+0019 120000      R     LCALL   DisplayProcess
+                                           ; SOURCE LINE # 17
+001C 80F0              SJMP    ?C0001
+             ; FUNCTION main (END)
+
+             ; FUNCTION TimeProcess (BEGIN)
+                                           ; SOURCE LINE # 20
+                                           ; SOURCE LINE # 24
+0000 30000C      E     JNB     b1ms,?C0004
+                                           ; SOURCE LINE # 26
+0003 C200        E     CLR     b1ms
+                                           ; SOURCE LINE # 27
+0005 0500        R     INC     timer5ms
+                                           ; SOURCE LINE # 28
+0007 0500        R     INC     second+01H
+0009 E500        R     MOV     A,second+01H
+000B 7002              JNZ     ?C0014
+000D 0500        R     INC     second
+000F         ?C0014:
+                                           ; SOURCE LINE # 29
+000F         ?C0004:
+                                           ; SOURCE LINE # 30
+000F C3                CLR     C
+0010 E500        R     MOV     A,timer5ms
+0012 9405              SUBB    A,#05H
+0014 7480              MOV     A,#080H
+0016 9480              SUBB    A,#080H
+0018 4006              JC      ?C0005
+                                           ; SOURCE LINE # 32
+001A E4                CLR     A
+001B F500        R     MOV     timer5ms,A
+                                           ; SOURCE LINE # 33
+001D 120000      E     LCALL   GetKeys
+                                           ; SOURCE LINE # 34
+0020         ?C0005:
+                                           ; SOURCE LINE # 35
+0020 C3                CLR     C
+C51 COMPILER V9.60.0.0   MAIN                                                              11/30/2019 23:17:59 PAGE 4   
+
+0021 E500        R     MOV     A,second+01H
+0023 94E8              SUBB    A,#0E8H
+0025 E500        R     MOV     A,second
+0027 9403              SUBB    A,#03H
+0029 4005              JC      ?C0007
+                                           ; SOURCE LINE # 37
+002B E4                CLR     A
+002C F500        R     MOV     second,A
+002E F500        R     MOV     second+01H,A
+                                           ; SOURCE LINE # 38
+                                           ; SOURCE LINE # 39
+0030         ?C0007:
+0030 22                RET     
+             ; FUNCTION TimeProcess (END)
+
+             ; FUNCTION TaskProcess (BEGIN)
+                                           ; SOURCE LINE # 41
+0000 22                RET     
+             ; FUNCTION TaskProcess (END)
+
+             ; FUNCTION TaskSetting (BEGIN)
+                                           ; SOURCE LINE # 43
+                                           ; SOURCE LINE # 44
+0000 E500        E     MOV     A,keyValue
+0002 6401              XRL     A,#01H
+0004 7002              JNZ     ?C0009
+                                           ; SOURCE LINE # 45
+0006 B200        R     CPL     bLedFlash
+                                           ; SOURCE LINE # 46
+0008         ?C0009:
+                                           ; SOURCE LINE # 47
+0008 E4                CLR     A
+0009 F500        E     MOV     keyValue,A
+                                           ; SOURCE LINE # 48
+000B 22                RET     
+             ; FUNCTION TaskSetting (END)
+
+             ; FUNCTION DisplayProcess (BEGIN)
+                                           ; SOURCE LINE # 50
+                                           ; SOURCE LINE # 52
+0000 300003      R     JNB     bLedFlash,?C0011
+                                           ; SOURCE LINE # 53
+0003 D290              SETB    P1_0
+                                           ; SOURCE LINE # 54
+0005 22                RET     
+0006         ?C0011:
+                                           ; SOURCE LINE # 55
+0006 C290              CLR     P1_0
+                                           ; SOURCE LINE # 56
+                                           ; SOURCE LINE # 57
+0008         ?C0013:
+0008 22                RET     
+             ; FUNCTION DisplayProcess (END)
+
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    119    ----
+   CODE SIZE        =    101    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      2    ----
+   DATA SIZE        =      3    ----
+C51 COMPILER V9.60.0.0   MAIN                                                              11/30/2019 23:17:59 PAGE 5   
+
    IDATA SIZE       =   ----    ----
-   BIT SIZE         =   ----    ----
+   BIT SIZE         =      1    ----
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
