@@ -1,0 +1,7 @@
+".\Objects\STARTUP_TENX52.obj",
+".\Objects\display.obj",
+".\Objects\init.obj",
+".\Objects\keys.obj",
+".\Objects\main.obj" 
+TO ".\Objects\Single port control" 
+PRINT(".\Listings\Single port control.m51") RAMSIZE(256) 
