@@ -4,4 +4,6 @@
 #include "display.h"
 #include "main.h"
 #include "init.h"
+#include "isr.h"
+#include "buzz.h"
 #include <INTRINS.H>

@@ -8,8 +8,10 @@ void main()
 	VarsInit(); //变量初始化
 	//使能看门狗
 	F_turnOnWDT();
-	F_led1On();
-	F_led2On();
+	P_buzz = 0;
+	delayMs(500);
+	//F_led1On();
+	//F_led2sOn();
 	while (1)
 	{
 		//喂狗
