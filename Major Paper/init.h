@@ -15,8 +15,5 @@
 // Function ------------------------------------
 void SysInit();
 void VarsInit();
-void smg_init();
-void led_init();
-void KeyInit();
 
 #endif

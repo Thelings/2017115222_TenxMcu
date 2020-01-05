@@ -1,12 +1,9 @@
-#include <REGtenxTM52F5268B.h>
+#include <REGtenxTM52F5278B.h>
 
 #include "typeAlias.h"
-
 #include "display.h"
-#include "init.h"
-#include "keys.h"
-#include "isr.h"
 #include "main.h"
+#include "init.h"
+#include "isr.h"
 #include "buzz.h"
-#include "smg.h"
 #include <INTRINS.H>
