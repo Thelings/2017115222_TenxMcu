@@ -1,10 +1,12 @@
 ".\Objects\STARTUP_TENX52.obj",
-".\Objects\display.obj",
-".\Objects\main.obj",
-".\Objects\init.obj",
 ".\Objects\buzz.obj",
-".\Objects\isr.obj" 
-TO ".\Objects\major_paper" 
-PRINT(".\Listings\major_paper.m51") RAMSIZE(256) 
+".\Objects\display.obj",
+".\Objects\init.obj",
+".\Objects\isr.obj",
+".\Objects\keys.obj",
+".\Objects\main.obj",
+".\Objects\smg.obj" 
+TO ".\Objects\Major_Paper" 
+PRINT(".\Listings\Major_Paper.m51") RAMSIZE(256) 
 CODE( 0x00-0x32,0x3b-0x0cff,0x1000-0x1ffd )
 XDATA( 0xff00-0xffff )
