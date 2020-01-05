@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   ISR                                                               01/03/2020 18:47:55 PAGE 1   
+C51 COMPILER V9.60.0.0   ISR                                                               01/05/2020 14:58:48 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE ISR
@@ -62,7 +62,7 @@ line level    source
   52          // Input: none
   53          // OutPut:  none
   54          // Author:
-C51 COMPILER V9.60.0.0   ISR                                                               01/03/2020 18:47:55 PAGE 2   
+C51 COMPILER V9.60.0.0   ISR                                                               01/05/2020 14:58:48 PAGE 2   
 
   55          //=============================================================================
   56          void UART_int(void) interrupt 4 {
@@ -79,55 +79,56 @@ line level    source
   67          void TIMER2_int(void) interrupt 5 {
   68   1        TF2 = 0; // clear interrupt flag
   69   1        b1ms = 1;
-  70   1       
-  71   1         F_buzz();   //P_buzz = ~P_buzz;
-  72   1      
-  73   1      }
-  74          //=============================================================================
-  75          // Function:  void TIMER3_int(void)
-  76          // Purpose: TIMER3 interrupt vector
-  77          // Input: none
-  78          // OutPut:  none
-  79          // Author:
-  80          //=============================================================================
-  81          void TIMER3_int(void) interrupt 7 { /*INTFLAG &= ~TF3; */}
-  82          //=============================================================================
-  83          // Function:  void P1_int(void)
-  84          // Purpose: P1 pin interrupt vector
-  85          // Input: none
-  86          // OutPut:  none
-  87          // Author:
-  88          //=============================================================================
-  89          void P1_int(void) interrupt 8 {/* INTFLAG &= ~P1IF; */}
-  90          //=============================================================================
-  91          // Function:  void INT2_int(void)
-  92          // Purpose: INT2 pin interrupt vector
-  93          // Input: none
-  94          // OutPut:  none
-  95          // Author:
-  96          //=============================================================================
-  97          void INT2_int(void) interrupt 9 { /*INTFLAG &= ~IE2; */}
-  98          //=============================================================================
-  99          // Function:  void ADC_TK_int(void)
- 100          // Purpose: ADC&TOUCHKEY interrupt vector
- 101          // Input: none
- 102          // OutPut:  none
- 103          // Author:
- 104          //=============================================================================
- 105          void ADC_TK_int(void) interrupt 10 {
- 106   1       /* INTFLAG &= ~ADIF;
- 107   1        INTFLAG &= ~TKIF;
- 108   1        TKCON2 &= ~TKAUTO; */ // disable touch key auto scan
- 109   1      }
+  70   1        if((buzzCounter)>0){
+  71   2           F_buzz(); //P_buzz = ~P_buzz;
+  72   2           buzzCounter--;
+  73   2        }
+  74   1      }
+  75          //=============================================================================
+  76          // Function:  void TIMER3_int(void)
+  77          // Purpose: TIMER3 interrupt vector
+  78          // Input: none
+  79          // OutPut:  none
+  80          // Author:
+  81          //=============================================================================
+  82          void TIMER3_int(void) interrupt 7 { /*INTFLAG &= ~TF3; */}
+  83          //=============================================================================
+  84          // Function:  void P1_int(void)
+  85          // Purpose: P1 pin interrupt vector
+  86          // Input: none
+  87          // OutPut:  none
+  88          // Author:
+  89          //=============================================================================
+  90          void P1_int(void) interrupt 8 {/* INTFLAG &= ~P1IF; */}
+  91          //=============================================================================
+  92          // Function:  void INT2_int(void)
+  93          // Purpose: INT2 pin interrupt vector
+  94          // Input: none
+  95          // OutPut:  none
+  96          // Author:
+  97          //=============================================================================
+  98          void INT2_int(void) interrupt 9 { /*INTFLAG &= ~IE2; */}
+  99          //=============================================================================
+ 100          // Function:  void ADC_TK_int(void)
+ 101          // Purpose: ADC&TOUCHKEY interrupt vector
+ 102          // Input: none
+ 103          // OutPut:  none
+ 104          // Author:
+ 105          //=============================================================================
+ 106          void ADC_TK_int(void) interrupt 10 {
+ 107   1       /* INTFLAG &= ~ADIF;
+ 108   1        INTFLAG &= ~TKIF;
+ 109   1        TKCON2 &= ~TKAUTO; */ // disable touch key auto scan
+ 110   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     28    ----
+   CODE SIZE        =     49    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-C51 COMPILER V9.60.0.0   ISR                                                               01/03/2020 18:47:55 PAGE 3   
+C51 COMPILER V9.60.0.0   ISR                                                               01/05/2020 14:58:48 PAGE 3   
 
+   PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      1    ----

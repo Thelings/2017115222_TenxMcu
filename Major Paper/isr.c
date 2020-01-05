@@ -67,9 +67,10 @@ void UART_int(void) interrupt 4 {
 void TIMER2_int(void) interrupt 5 {
   TF2 = 0; // clear interrupt flag
   b1ms = 1;
- 
-   F_buzz();   //P_buzz = ~P_buzz;
-
+  if((buzzCounter)>0){
+     F_buzz(); //P_buzz = ~P_buzz;
+     buzzCounter--;
+  }
 }
 //=============================================================================
 // Function:	void TIMER3_int(void)

@@ -7,8 +7,10 @@
 // Globle Var -----------------------------------------
 #ifdef __isr_c
 bit b1ms;
+
 #else
 extern bit b1ms;
+
 #endif
 
 // Action Macro: exp: #define F_getData() ------
