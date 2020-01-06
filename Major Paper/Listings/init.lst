@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   INIT                                                              01/05/2020 14:58:48 PAGE 1   
+C51 COMPILER V9.60.0.0   INIT                                                              01/06/2020 08:51:04 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE INIT
@@ -13,7 +13,7 @@ line level    source
    3          //=============================================================================
    4          void SysInit() {
    5   1        F_clearWDT();
-   6   1        //时钟初�?�化
+   6   1        //
    7   1        CLKCON = 0x03; // Clock div 1  7.3728Mhz
    8   1        STPPCK = 0;
    9   1        STPFCK = 0;
@@ -62,7 +62,7 @@ line level    source
   52   1        P1MODH |= 0x82;
   53   1        /*b 3.4 || c 3.5 || e 3.6*/
   54   1        P3MODH &= 0x00;
-C51 COMPILER V9.60.0.0   INIT                                                              01/05/2020 14:58:48 PAGE 2   
+C51 COMPILER V9.60.0.0   INIT                                                              01/06/2020 08:51:04 PAGE 2   
 
   55   1        P3MODH |= 0x2a;
   56   1        /*f 1.2||dg 1.3 */
@@ -84,20 +84,16 @@ line level    source
   72          {
   73   1        /* key 1 */
   74   1        P3MODH &= P34MOD_Mask;
-  75   1        P3MODH |= P34MOD_0;
-  76   1      
-  77   1        /* key 2 */
-  78   1        P3MODL &= P32MOD_Mask;
-  79   1        P3MODL |= P32MOD_0;
-  80   1      
-  81   1        /* key 3 */
-  82   1        P1MODH &= P17MOD_Mask;
-  83   1        P1MODH |= P17MOD_0;
-  84   1      
-  85   1        /* key 4 */
-  86   1        P1MODL &= P12MOD_Mask;
-  87   1        P1MODL |= P12MOD_0;
-  88   1      }
+  75   1      
+  76   1        /* key 2 */
+  77   1        P3MODL &= P32MOD_Mask;
+  78   1      
+  79   1        /* key 3 */
+  80   1        P1MODH &= P17MOD_Mask;
+  81   1      
+  82   1        /* key 4 */
+  83   1        P1MODL &= P12MOD_Mask;
+  84   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

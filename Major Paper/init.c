@@ -3,7 +3,7 @@
 //=============================================================================
 void SysInit() {
 	F_clearWDT();
-  //时钟初�?�化
+  //
   CLKCON = 0x03; // Clock div 1  7.3728Mhz
   STPPCK = 0;
   STPFCK = 0;
@@ -72,17 +72,13 @@ void KeyInit()
 {
 	/* key 1 */
 	P3MODH &= P34MOD_Mask;
-	P3MODH |= P34MOD_0;
 
 	/* key 2 */
 	P3MODL &= P32MOD_Mask;
-	P3MODL |= P32MOD_0;
 
 	/* key 3 */
 	P1MODH &= P17MOD_Mask;
-	P1MODH |= P17MOD_0;
 
 	/* key 4 */
 	P1MODL &= P12MOD_Mask;
-	P1MODL |= P12MOD_0;
 }

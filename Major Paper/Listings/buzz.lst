@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   BUZZ                                                              01/05/2020 14:58:47 PAGE 1   
+C51 COMPILER V9.60.0.0   BUZZ                                                              01/06/2020 08:51:03 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE BUZZ
@@ -12,19 +12,11 @@ line level    source
    2          
    3          #include    "includeAll.h"
    4          
-   5          void BuzzCount(uint8_t count)
-   6          {
-   7   1          buzzCounter = count ; 
-   8   1      }
-   9          
-  10          void Buzz(){
-  11   1          buzzLastTimer = D_buzzLastTime ;
-  12   1      }
-  13          
+   5          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =      7    ----
+   CODE SIZE        =   ----    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

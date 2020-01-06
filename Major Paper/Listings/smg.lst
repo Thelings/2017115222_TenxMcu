@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   SMG                                                               01/05/2020 14:58:48 PAGE 1   
+C51 COMPILER V9.60.0.0   SMG                                                               01/06/2020 08:51:05 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE SMG
@@ -13,11 +13,11 @@ line level    source
    3          
    4          
    5          
-   6          char mask[]={0x1,0x2,0x4,0x8,0x10,0x20,0x40,0x80};//—⁄¬Î£¨”√¿¥≈–∂œ0~7Œª «∑ÒŒ™1
+   6          char mask[]={0x1,0x2,0x4,0x8,0x10,0x20,0x40,0x80};//Êé©Á†ÅÔºåÁî®Êù•Âà§Êñ≠0~7‰ΩçÊòØÂê¶‰∏∫1
    7          /*
-   8          * ˝¬Îπ‹œ‘ æ*
-   9          *x:œ‘ æµƒ◊÷∑˚£®¿˝»Á£∫0x3f->0;0x3fµƒD0~D7º¥a~g£©
-  10          *number:µ⁄º∏∫≈π‹Ω≈(1”“2◊Û)
+   8          *Êï∞Á†ÅÁÆ°ÊòæÁ§∫*
+   9          *x:ÊòæÁ§∫ÁöÑÂ≠óÁ¨¶Ôºà‰æãÂ¶ÇÔºö0x3f->0;0x3fÁöÑD0~D7Âç≥a~gÔºâ
+  10          *number:Á¨¨Âá†Âè∑ÁÆ°ËÑö(1Âè≥2Â∑¶)
   11          */
   12          void smg_display(char x,uint8_t number){
   13   1          if(number==1){
@@ -62,7 +62,7 @@ line level    source
   52   2          }
   53   1          /*e*/
   54   1          if (x&mask[4])
-C51 COMPILER V9.60.0.0   SMG                                                               01/05/2020 14:58:48 PAGE 2   
+C51 COMPILER V9.60.0.0   SMG                                                               01/06/2020 08:51:05 PAGE 2   
 
   55   1          {
   56   2              SMG_E=1;
@@ -89,8 +89,8 @@ line level    source
   77   1          SMG_DG=0;
   78   1      }
   79          /*
-  80          *¡Ω∏ˆ ˝¬Îπ‹¡¡*
-  81          *◊Ûπ‹œ‘ æx£¨”“π‹œ‘ æy*
+  80          *‰∏§‰∏™Êï∞Á†ÅÁÆ°‰∫Æ*
+  81          *Â∑¶ÁÆ°ÊòæÁ§∫xÔºåÂè≥ÁÆ°ÊòæÁ§∫y*
   82          */
   83          void smg_double(char x,char y){
   84   1          uint8_t a,b;
@@ -110,11 +110,12 @@ line level    source
   98   1      
   99   1      }
  100          
- 101          /*πÿ±’ ˝¬Îπ‹*/
- 102          void smg_close(){
- 103   1        SMG_COM1=1;
- 104   1        SMG_COM2=1;
- 105   1      }
+ 101          
+ 102          /*ÂÖ≥Èó≠Êï∞Á†ÅÁÆ°*/
+ 103          void smg_close(){
+ 104   1        SMG_COM1=1;
+ 105   1        SMG_COM2=1;
+ 106   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
@@ -125,9 +126,9 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    DATA SIZE        =      8       4
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
-END OF MODULE INFORMATION.
+C51 COMPILER V9.60.0.0   SMG                                                               01/06/2020 08:51:05 PAGE 3   
 
-C51 COMPILER V9.60.0.0   SMG                                                               01/05/2020 14:58:48 PAGE 3   
+END OF MODULE INFORMATION.
 
 
 C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
